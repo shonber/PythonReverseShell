@@ -1,2 +1,8 @@
 # PythonReverseShell
-Reverse shell made with python
+
+Simple python reverse shell.
+
+# Includes:
+Server Side - Hacker
+Client Side - Target
+
