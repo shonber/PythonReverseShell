@@ -23,7 +23,7 @@ class ReverseTcpConnection(object):
                   "\n_______________________________________________________________\n")
             
             # _If statement to check for client:
-            # _If there is a client, continue the script.
+            # _If there is a client, the script will continue.
             if self.clients:
                 
                 # _Infinite loop for sending & receiving data:
